@@ -2,6 +2,7 @@ package com.example.servidorapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import com.example.servidorapp.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -23,12 +24,12 @@ class MainActivity : AppCompatActivity() {
         preguntanueva(token!!)
 
     }
+
+
     fun preguntanueva(token: String){
         val client = OkHttpClient()
-
         val request = Request.Builder()
         request.url("http://10.0.2.2:8082/getPregunta/${token}")
-
 
         val call = client.newCall(request.build())
         call.enqueue( object : Callback {
@@ -58,40 +59,57 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     binding.bt1.setOnClickListener {
-                        if (binding.bt1.text.toString() == pregunta.repuestaCorrecta.toString()) {
-                            Toast.makeText(this@MainActivity, "Respuesta Correcta!!", Toast.LENGTH_SHORT).show()
-                        }
-                        else {
-                            Toast.makeText(this@MainActivity, "Fallaste", Toast.LENGTH_SHORT).show()}
-                        preguntanueva(token)
+                        (responder(binding.bt1, token, pregunta.id))
                     }
 
                     binding.bt2.setOnClickListener {
-                        if (binding.bt2.text.toString() == pregunta.repuestaCorrecta.toString()) {
-                            Toast.makeText(this@MainActivity, "Respuesta Correcta!!", Toast.LENGTH_SHORT).show()
-                        }
-                        else {Toast.makeText(this@MainActivity, "Fallaste", Toast.LENGTH_SHORT).show()}
-                        preguntanueva(token)
+                        (responder(binding.bt2, token, pregunta.id))
                     }
 
 
                     binding.bt3.setOnClickListener {
-                        if (binding.bt3.text.toString() == pregunta.repuestaCorrecta.toString() ) {
-                            Toast.makeText(this@MainActivity, "Respuesta Correcta!!", Toast.LENGTH_SHORT).show()
-                        } else{ Toast.makeText(this@MainActivity, "Fallaste", Toast.LENGTH_SHORT).show()}
-                        preguntanueva(token)
+                        (responder(binding.bt2, token, pregunta.id))
                     }
 
 
                     binding.bt4.setOnClickListener {
-                        if (binding.bt4.text.toString() == pregunta.repuestaCorrecta.toString() ) {
-                            Toast.makeText(this@MainActivity, "Respuesta Correcta!!", Toast.LENGTH_SHORT).show()
-
-                        } else {Toast.makeText(this@MainActivity, "Fallaste", Toast.LENGTH_SHORT).show()}
-                        preguntanueva(token)
+                        (responder(binding.bt4, token, pregunta.id))
                     }
                 }
             }
         })
     }
+
+    fun responder(boton: Button, token: String, id: Int,){
+        val client = OkHttpClient()
+        val boton = boton.text.toString()
+        val request = Request.Builder()
+        request.url("http://10.0.2.2:8082/getPregunta/${boton}/${id}/${token}")
+
+
+        val call = client.newCall(request.build())
+        call.enqueue( object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                println(e.toString())
+                CoroutineScope(Dispatchers.Main).launch {
+                    Toast.makeText(this@MainActivity, "Algo ha ido mal", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                println(response.toString())
+                response.body?.let { responseBody ->
+                    val body = responseBody.string()
+                    println(body)
+
+
+                    CoroutineScope(Dispatchers.Main).launch {
+                        Toast.makeText(this@MainActivity, body, Toast.LENGTH_SHORT).show()
+                        preguntanueva(token)
+                    }
+
+                }
+            }
+        })
     }
+}

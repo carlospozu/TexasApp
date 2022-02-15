@@ -45,7 +45,6 @@ class LoginActivity : AppCompatActivity() {
                 response.body?.let { responseBody ->
                     val body = responseBody.string()
                     println(body)
-                    val gson = Gson()
                     CoroutineScope(Dispatchers.Main).launch {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
                         intent.putExtra("token", body)
