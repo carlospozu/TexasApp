@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
 
                     binding.bt3.setOnClickListener {
-                        (responder(binding.bt2, token, pregunta.id))
+                        (responder(binding.bt3, token, pregunta.id))
                     }
 
 
