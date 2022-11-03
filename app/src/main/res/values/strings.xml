@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">servidorApp</string>
     <string name="quien_quiere_ser_millonario">QUIEN QUIERE SER MILLONARIO</string>
+    <string name="numero_de_jugadores">Numero de Jugadores</string>
 </resources>
