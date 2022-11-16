@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/activity_main.xml" value="0.14722222222222223" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_player.xml" value="0.1703125" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/jugadores.xml" value="0.16927083333333334" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/login.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/drawable/estilo_boton.xml" value="0.178" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/drawable/style_bordes_edittext.xml" value="0.2505" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/drawable/style_fondo.xml" value="0.179" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_player.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/jugadores.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/login.xml" value="0.25" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="16" project-jdk-type="JavaSDK" />
 </project>
