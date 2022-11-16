@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         var token = intent.getStringExtra("token")
 
         val intent = Intent(this@MainActivity, MainActivity::class.java)
-        intent.putExtra("token", body)
+        //intent.putExtra("token", body)
         startActivity(intent)
 
     }
