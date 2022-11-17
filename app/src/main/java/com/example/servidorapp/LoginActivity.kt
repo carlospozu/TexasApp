@@ -24,15 +24,18 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.btnLogin.setOnClickListener {
             val passwordCifrada = cifrar(binding.password.text.toString(), generarToken())
-            login(binding.etEmail.text.toString(), passwordCifrada)
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            //intent.putExtra("token", body)
+            startActivity(intent)
+            //login(binding.etEmail.text.toString(), passwordCifrada)
         }
 
     }
 
-    fun login(usuario: String, contrasena: String) {
+   /* fun login(usuario: String, contrasena: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
-        request.url("http://10.0.2.2:8082/Registro/${usuario}/${contrasena}")
+        request.url("http://10.0.2.2:8084/Registro/${usuario}/${contrasena}")
         val call = client.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -49,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     println(body)
                     CoroutineScope(Dispatchers.Main).launch {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        intent.putExtra("token", body)
+                        //intent.putExtra("token", body)
                         startActivity(intent)
                     }
 
@@ -58,6 +61,8 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
+    */
     private fun cifrar(textoEnString : String, llaveEnString : String) : String {
         println("Voy a cifrar: $textoEnString")
         val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")

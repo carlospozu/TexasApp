@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="145dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:background="@drawable/style_bordes_edittext"
+    android:padding="10dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:id="@+id/fondo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:orientation="horizontal">
+
+
+
+            <ImageView
+
+                android:layout_margin="10dp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+
+                ></ImageView>
+
+
+            <EditText
+
+                android:id="@+id/nom_user"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:text="Nombre Player"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+           android:layout_marginLeft="10dp"
+            android:background="@drawable/estilo_boton"
+            android:text="SAVE"
+            />
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

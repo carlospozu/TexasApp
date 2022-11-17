@@ -6,10 +6,12 @@
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/drawable/estilo_boton.xml" value="0.178" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/drawable/style_bordes_edittext.xml" value="0.2505" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/drawable/style_fondo.xml" value="0.179" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_player.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_player.xml" value="0.33" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_user.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/jugadores.xml" value="0.25" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/login.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/usuarios.xml" value="0.22708333333333333" />
       </map>
     </option>
   </component>

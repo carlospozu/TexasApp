@@ -78,4 +78,16 @@
         app:srcCompat="@drawable/texa" />
 
 
+    <Button
+        android:id="@+id/next"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:background="@drawable/estilo_boton"
+        android:text="AVANZAR"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
