@@ -21,10 +21,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.login)
         binding.btnLogin.setOnClickListener {
             val passwordCifrada = cifrar(binding.password.text.toString(), generarToken())
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             //intent.putExtra("token", body)
             startActivity(intent)
             //login(binding.etEmail.text.toString(), passwordCifrada)

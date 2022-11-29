@@ -37,6 +37,7 @@ class UsersActivity : AppCompatActivity() {
 
     binding.avanzar.setOnClickListener {
         val intent = Intent(this@UsersActivity, JuegoActivity::class.java)
+
         startActivity(intent)
         }
     }
@@ -45,6 +46,7 @@ class UsersActivity : AppCompatActivity() {
         adapter = AdapterUsers(players, lista, stack)
         binding.rvUsers.layoutManager = LinearLayoutManager(this@UsersActivity)
         binding.rvUsers.adapter = adapter
+
     }
 }
 
