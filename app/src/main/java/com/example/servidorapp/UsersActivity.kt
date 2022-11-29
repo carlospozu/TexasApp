@@ -2,34 +2,28 @@ package com.example.servidorapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.servidorapp.databinding.ActivityMainBinding
-import com.example.servidorapp.databinding.LoginBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.example.servidorapp.databinding.UsuariosBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.*
-import java.io.IOException
-import java.security.MessageDigest
-import javax.crypto.Cipher
-import javax.crypto.spec.SecretKeySpec
 
 class UsersActivity : AppCompatActivity() {
 
 
     private lateinit var binding: UsuariosBinding
     lateinit var adapter: AdapterUsers
+    private lateinit var recyvlerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = UsuariosBinding.inflate(layoutInflater)
-        setContentView(R.layout.usuarios)
+        setContentView(binding.root)
+        recyvlerView = findViewById(R.id.rvUsers)
+
+
         val listaUser: MutableList<Usuarios> = mutableListOf()
-        val players = intent.getIntExtra("players", 0)
-        val stack = intent.getIntExtra("stack", 0)
+        val players = intent.getIntExtra("players", 5)
+        val stack = intent.getIntExtra("stack", 20000)
 
         adapter(players, listaUser, stack)
 
@@ -44,8 +38,8 @@ class UsersActivity : AppCompatActivity() {
 
     fun adapter(players: Int, lista: MutableList<Usuarios>, stack: Int) {
         adapter = AdapterUsers(players, lista, stack)
-        binding.rvUsers.layoutManager = LinearLayoutManager(this@UsersActivity)
-        binding.rvUsers.adapter = adapter
+        recyvlerView.layoutManager = LinearLayoutManager(this@UsersActivity)
+        recyvlerView.adapter = adapter
 
     }
 }

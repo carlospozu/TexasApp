@@ -2,6 +2,7 @@ package com.example.servidorapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.servidorapp.databinding.LoginBinding
@@ -17,25 +18,26 @@ import javax.crypto.spec.SecretKeySpec
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: LoginBinding
+    private lateinit var btnLogin: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LoginBinding.inflate(layoutInflater)
         setContentView(R.layout.login)
-        binding.btnLogin.setOnClickListener {
+        binding = LoginBinding.inflate(layoutInflater)
+
+        btnLogin = findViewById(R.id.btnLogin)
+
+         btnLogin.setOnClickListener{
             val passwordCifrada = cifrar(binding.password.text.toString(), generarToken())
-            val intent = Intent(this, MainActivity::class.java)
-            //intent.putExtra("token", body)
-            startActivity(intent)
-            //login(binding.etEmail.text.toString(), passwordCifrada)
+            login(binding.etEmail.text.toString(), passwordCifrada)
         }
 
     }
 
-   /* fun login(usuario: String, contrasena: String) {
+   fun login(usuario: String, contrasena: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
-        request.url("http://10.0.2.2:8084/Registro/${usuario}/${contrasena}")
+        request.url("http://10.0.2.2:8082/crearUsuario/${usuario}/${contrasena}")
         val call = client.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -62,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    */
+
     private fun cifrar(textoEnString : String, llaveEnString : String) : String {
         println("Voy a cifrar: $textoEnString")
         val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo1">
+    android:background="@drawable/fondo1"
+    tools:context=".MainActivity">
 
 
     <TextView
@@ -25,14 +26,12 @@
         app:layout_constraintVertical_bias="0.254" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/num_jug"
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:background="@drawable/style_bordes_edittext"
-        android:padding="15dp"
         android:rotationX="10"
-        android:textColor="@color/white"
-        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.274"
@@ -56,6 +55,7 @@
         app:layout_constraintVertical_bias="0.133" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/num_fichas"
         android:layout_width="70dp"
         android:layout_height="40dp"
