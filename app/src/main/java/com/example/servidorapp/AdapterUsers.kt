@@ -1,11 +1,19 @@
 package com.example.servidorapp
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servidorapp.databinding.ItemUserBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
 
 
 class AdapterUsers(var players: Int, var stack: Int) :
@@ -26,9 +34,35 @@ class AdapterUsers(var players: Int, var stack: Int) :
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
         holder.itemBinding.save.setOnClickListener{
         val nombre =  holder.itemBinding.nomUser.text.toString()
-           CrearJugRequest.get(nombre, stack)
-       // lista.add(Usuarios(nombre,stack)) llamada server
-        holder.itemBinding.fondo.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+           login(holder, nombre, stack)
         }
+    }
+
+    fun login(holder: TextoViewHolder, usuario: String, stack: Int) {
+        val client = OkHttpClient()
+        val request = Request.Builder()
+        request.url("http://10.0.2.2:8084/jugador/${usuario}/${stack}")
+        val call = client.newCall(request.build())
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                println(e.toString())
+                CoroutineScope(Dispatchers.Main).launch {
+                    println("ALGO HA IDO MAL")
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                println(response.toString())
+                response.body?.let { responseBody ->
+                    val body = responseBody.string()
+                    println(body)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        holder.itemBinding.fondo.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                    }
+
+                }
+
+            }
+        })
     }
 }

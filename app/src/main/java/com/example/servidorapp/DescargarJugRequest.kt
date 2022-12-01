@@ -11,8 +11,8 @@ class DescargarJugRequest {
 
         private var gson = Gson()
 
-        fun get( players: Int): ListaJugadores {
-            val listaJug = ListaJugadores()
+        fun get( players: Int): MutableList<Jugadores> {
+            val listaJug = mutableListOf<Jugadores>()
             val client = OkHttpClient()
             for (i in 1..players) {
                 val request = Request.Builder()
@@ -24,7 +24,7 @@ class DescargarJugRequest {
                     response.body?.string().let { responseBody ->
                         val jugador = gson.fromJson(responseBody, Jugadores::class.java)
 
-                        listaJug.agregar(jugador)
+                        listaJug.add(jugador)
                     }
 
                 } else
