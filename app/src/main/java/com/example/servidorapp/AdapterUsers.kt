@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.servidorapp.databinding.ItemUserBinding
 
 
-class AdapterUsers(var players: Int, var lista: MutableList<Usuarios>, var stack: Int) :
+class AdapterUsers(var players: Int, var stack: Int) :
     RecyclerView.Adapter<AdapterUsers.TextoViewHolder>() {
 
     class TextoViewHolder(var itemBinding: ItemUserBinding) :
@@ -26,7 +26,8 @@ class AdapterUsers(var players: Int, var lista: MutableList<Usuarios>, var stack
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
         holder.itemBinding.save.setOnClickListener{
         val nombre =  holder.itemBinding.nomUser.text.toString()
-        lista.add(Usuarios(nombre,stack))
+           CrearJugRequest.get(nombre, stack)
+       // lista.add(Usuarios(nombre,stack)) llamada server
         holder.itemBinding.fondo.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
         }
     }

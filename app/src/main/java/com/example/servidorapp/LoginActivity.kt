@@ -3,6 +3,7 @@ package com.example.servidorapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.servidorapp.databinding.LoginBinding
@@ -19,6 +20,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: LoginBinding
     private lateinit var btnLogin: Button
+    private lateinit var etEmail: EditText
+    private lateinit var password: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,18 +29,24 @@ class LoginActivity : AppCompatActivity() {
         binding = LoginBinding.inflate(layoutInflater)
 
         btnLogin = findViewById(R.id.btnLogin)
+        etEmail = findViewById(R.id.et_email)
+        password = findViewById(R.id.password)
 
          btnLogin.setOnClickListener{
-            val passwordCifrada = cifrar(binding.password.text.toString(), generarToken())
-            login(binding.etEmail.text.toString(), passwordCifrada)
+             val passwordCifrada = cifrar(binding.password.text.toString(), generarToken())
+             val email = etEmail.text.toString()
+          //LoginRequest.get(etEmail.text.toString(), passwordCifrada)
+            login(email, passwordCifrada)
+             val intent = Intent(this@LoginActivity, MainActivity::class.java)
+             startActivity(intent)
         }
 
     }
 
-   fun login(usuario: String, contrasena: String) {
+    fun login(usuario: String, contrasena: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
-        request.url("http://10.0.2.2:8082/crearUsuario/${usuario}/${contrasena}")
+        request.url("http://10.0.2.2:8084/crearUsuario/${usuario}/${contrasena}")
         val call = client.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -54,7 +63,6 @@ class LoginActivity : AppCompatActivity() {
                     println(body)
                     CoroutineScope(Dispatchers.Main).launch {
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        //intent.putExtra("token", body)
                         startActivity(intent)
                     }
 
@@ -65,12 +73,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+
     private fun cifrar(textoEnString : String, llaveEnString : String) : String {
         println("Voy a cifrar: $textoEnString")
         val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")
         cipher.init(Cipher.ENCRYPT_MODE, getKey(llaveEnString))
         val textCifrado = android.util.Base64.encodeToString(cipher.doFinal(textoEnString.toByteArray(Charsets.UTF_8)), android.util.Base64.URL_SAFE)
-
         println("He obtenido $textCifrado")
         return textCifrado
     }
@@ -92,6 +100,11 @@ class LoginActivity : AppCompatActivity() {
         }
         return generado
     }
+
+
+
+
+
 
 
 }
