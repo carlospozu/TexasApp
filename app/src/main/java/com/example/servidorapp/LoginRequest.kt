@@ -1,7 +1,6 @@
 package com.example.servidorapp
 
-import android.content.Intent
-import com.google.gson.Gson
+
 import okhttp3.OkHttpClient
 import okhttp3.Request
 

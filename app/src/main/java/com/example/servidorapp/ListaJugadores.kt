@@ -1,6 +1,6 @@
 package com.example.servidorapp
 
-import com.example.demo.Jugadores
+
 import com.google.gson.Gson
 
 

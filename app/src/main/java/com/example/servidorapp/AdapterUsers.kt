@@ -34,11 +34,11 @@ class AdapterUsers(var players: Int, var stack: Int) :
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
         holder.itemBinding.save.setOnClickListener{
         val nombre =  holder.itemBinding.nomUser.text.toString()
-           login(holder, nombre, stack)
+           llamada(holder, nombre, stack)
         }
     }
 
-    fun login(holder: TextoViewHolder, usuario: String, stack: Int) {
+    fun llamada(holder: TextoViewHolder, usuario: String, stack: Int) {
         val client = OkHttpClient()
         val request = Request.Builder()
         request.url("http://10.0.2.2:8084/jugador/${usuario}/${stack}")

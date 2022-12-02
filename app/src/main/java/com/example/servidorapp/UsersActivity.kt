@@ -3,14 +3,12 @@ package com.example.servidorapp
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.demo.Jugadores
+
 import com.example.servidorapp.databinding.UsuariosBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class UsersActivity : AppCompatActivity() {
 
@@ -32,16 +30,9 @@ class UsersActivity : AppCompatActivity() {
 
 
     binding.avanzar.setOnClickListener{
-        lifecycleScope.launch(Dispatchers.IO) {
-            var listaJugadores = mutableListOf<Jugadores>()
-            listaJugadores = DescargarJugRequest.get(players)
-            withContext(Dispatchers.Main) {
                 val intent = Intent(this@UsersActivity, JuegoActivity::class.java)
                 intent.putExtra("players", players)
                 startActivity(intent)
-            }
-        }
-
         }
     }
 
