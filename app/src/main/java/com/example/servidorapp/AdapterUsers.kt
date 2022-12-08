@@ -1,12 +1,9 @@
 package com.example.servidorapp
 
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.servidorapp.databinding.ItemUserBinding
 import kotlinx.coroutines.CoroutineScope
@@ -34,14 +31,14 @@ class AdapterUsers(var players: Int, var stack: Int) :
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
         holder.itemBinding.save.setOnClickListener{
         val nombre =  holder.itemBinding.nomUser.text.toString()
-           llamada(holder, nombre, stack)
+           llamada(holder, nombre, stack, position+1)
         }
     }
 
-    fun llamada(holder: TextoViewHolder, usuario: String, stack: Int) {
+    fun llamada(holder: TextoViewHolder, usuario: String, stack: Int, position: Int) {
         val client = OkHttpClient()
         val request = Request.Builder()
-        request.url("http://10.0.2.2:8084/jugador/${usuario}/${stack}")
+        request.url("http://10.0.2.2:8084/jugador/${usuario}/${stack}/${position}")
         val call = client.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {

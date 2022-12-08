@@ -2,12 +2,18 @@ package com.example.servidorapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.servidorapp.databinding.ItemPlayerBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
 
 
-class AdapterJugadores(private var players: Int, private var jugador: ListaJugadores)
+class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
     : RecyclerView.Adapter<AdapterJugadores.TextoViewHolder>() {
 
     class TextoViewHolder(val itemBinding: ItemPlayerBinding) :
@@ -24,20 +30,22 @@ class AdapterJugadores(private var players: Int, private var jugador: ListaJugad
     }
 
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
-        holder.itemBinding.user.text = jugador.listaJug[position].nombre
-        holder.itemBinding.stack.text = jugador.listaJug[position].stack.toString()
-    }
-}
-     /*   val id = jug.id
+        val jug= jugador.listaJug[position]
+        holder.itemBinding.user.text = jug.nombre
+        holder.itemBinding.stack.text = jug.stack.toString()
+        if (!jug.turno){
+            holder.itemBinding.cajaJug.isEnabled.not()
+        }
+        val id = jug.id
 
         holder.itemBinding.check.setOnClickListener {
-            val peticion = "http://10.0.2.2:8084/check/${id}"
+            val peticion = "http://10.0.2.2:8084/check/${position}"
             llamada(holder, peticion)
                 }
 
         holder.itemBinding.call.setOnClickListener {
-         //   val peticion = "http://10.0.2.2:8084/call/${cantidad}/${bote}"
-         //   llamada(holder, peticion)
+           // val peticion = "http://10.0.2.2:8084/call/${cantidad}/${bote}"
+           // llamada(holder, peticion)
         }
 
         holder.itemBinding.raise.setOnClickListener {
@@ -47,21 +55,23 @@ class AdapterJugadores(private var players: Int, private var jugador: ListaJugad
 
         holder.itemBinding.fold.setOnClickListener {
             val peticion = "http://10.0.2.2:8084/fold/${id}"
-            llamada(holder, peticion)
+          //  llamada(holder, peticion)
         }
+
 
         }
 
-    fun llamada(holder: TextoViewHolder, peticion:  String) {
+
+    fun llamada(holder: TextoViewHolder, peticion: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
-        request.url("$peticion")
+        request.url(peticion)
         val call = client.newCall(request.build())
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 println(e.toString())
                 CoroutineScope(Dispatchers.Main).launch {
-                    println("ALGO HA IDO MAL")
+                    Toast.makeText(holder.itemBinding.root.context, "Algo ha ido mal", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -71,7 +81,7 @@ class AdapterJugadores(private var players: Int, private var jugador: ListaJugad
                     val body = responseBody.string()
                     println(body)
                     CoroutineScope(Dispatchers.Main).launch {
-                        holder.itemBinding.caja.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+                        print("Correcto")
                     }
 
                 }
@@ -79,7 +89,10 @@ class AdapterJugadores(private var players: Int, private var jugador: ListaJugad
             }
         })
     }
-    */
+    }
+
+
+
 
 
 
