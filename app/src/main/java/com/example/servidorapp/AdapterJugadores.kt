@@ -2,7 +2,6 @@ package com.example.servidorapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,8 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
     : RecyclerView.Adapter<AdapterJugadores.TextoViewHolder>() {
 
     private var canToCall = 0
-
+    private var cont = 0
+    private var boteActual = 0
     class TextoViewHolder(val itemBinding: ItemPlayerBinding) :
         RecyclerView.ViewHolder(itemBinding.root)
 
@@ -35,8 +35,30 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
     }
 
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
+        var player = players -1
 
-        var boteActual = 0
+
+        for (i in 0 .. player){
+            if (jugador.listaJug[i].vivo){
+                cont ++
+            }
+        }
+        if (cont == 1 ){
+            for (i in 0 .. player){
+                jugador.listaJug[i].turno = false
+                if (jugador.listaJug[i].vivo){
+                    Toast.makeText(holder.itemBinding.root.context, "Turno acabado, ganador el jugador ${jugador.listaJug[i].nombre}", Toast.LENGTH_SHORT).show()
+                    jugador.listaJug[i].stack += boteActual
+                    boteActual = 0
+                    jugador.listaJug[0].turno = true
+                }
+            }
+            for (t in 0 .. player){
+                jugador.listaJug[t].vivo = true
+            }
+        }else{
+            cont = 0
+        }
 
         val jug= jugador.listaJug[position]
         var next=position+1
@@ -63,16 +85,30 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
         holder.itemBinding.check.setOnClickListener {
             val peticion = "http://10.0.2.2:8084/check/${id}"
             llamada(holder, peticion)
-
             holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
             jug.turno = false
+            /*
             if (next > players-1){
                 next = 0
             }
-            jugador.listaJug[next].turno=true
+           jugador.listaJug[next].turno=true
+
+             */
+            var bool = false
+            while (!bool){
+                if (next > players-1){
+                    next = 0
+                }
+                if (jugador.listaJug[next].vivo){
+                    jugador.listaJug[next].turno= true
+                    next=position+1
+                    bool = true
+                }else{
+                    next ++
+                }
+            }
             notifyDataSetChanged()
                 }
-
 
 
         holder.itemBinding.call.setOnClickListener {
@@ -82,11 +118,25 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
             jug.stack = jug.stack - canToCall
             holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
             jug.turno = false
-            if (next > players-1){
+           /* if (next > players-1){
                 next = 0
             }
             jugador.listaJug[next].turno=true
+            */
             //juegoActivity.subirBote(canToCall)
+            var bool = false
+            while (!bool){
+                if (next > players-1){
+                    next = 0
+                }
+                if (jugador.listaJug[next].vivo){
+                    jugador.listaJug[next].turno= true
+                    next=position+1
+                    bool = true
+                }else{
+                    next ++
+                }
+            }
            notifyDataSetChanged()
            // notifyItemChanged(position)
         }
@@ -102,11 +152,25 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
             jug.stack = jug.stack - canToCall
             holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
             jug.turno = false
-            if (next > players-1){
+            /*if (next > players-1){
                 next = 0
             }
             jugador.listaJug[next].turno=true
+             */
             //juegoActivity.subirBote(canToCall)
+            var bool = false
+            while (!bool){
+                if (next > players-1){
+                    next = 0
+                }
+                if (jugador.listaJug[next].vivo){
+                    jugador.listaJug[next].turno= true
+                    next=position+1
+                    bool = true
+                }else{
+                    next ++
+                }
+            }
            notifyDataSetChanged()
           //  notifyItemChanged(position)
         }
@@ -119,16 +183,33 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
 
             holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
             jug.turno = false
-            if (next > players-1){
+            jug.vivo = false
+           /* if (next > players-1){
                 next = 0
             }
             jugador.listaJug[next].turno=true
+             */
+            var bool = false
+            while (!bool){
+                if (next > players-1){
+                    next = 0
+                }
+                if (jugador.listaJug[next].vivo){
+                    jugador.listaJug[next].turno= true
+                    next=position+1
+                    bool = true
+                }else{
+                    next ++
+                }
+            }
            notifyDataSetChanged()
            // notifyItemChanged(position)
         }
 
 
         }
+
+
 
 
     fun llamada(holder: TextoViewHolder, peticion: String) {
