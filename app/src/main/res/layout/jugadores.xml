@@ -7,6 +7,7 @@
    >
 
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJuego"
         android:layout_width="match_parent"
@@ -18,7 +19,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="10"
-        tools:listitem="@layout/item_player"></androidx.recyclerview.widget.RecyclerView>
+        tools:listitem="@layout/item_player" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/bote"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:background="@drawable/estilo_boton"
+        app:layout_constraintTop_toBottomOf="@+id/rvJuego"
+        app:layout_constraintBottom_toBottomOf="@+id/rvJuego"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rvJuego" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

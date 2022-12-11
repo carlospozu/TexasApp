@@ -14,8 +14,12 @@ class ListaJugadores(var listaJug : MutableList<Jugadores> = mutableListOf()) {
     }
 
     fun agregar(jugador: Jugadores) {
+        if (jugador.id==1){
+            jugador.turno=true
+        }
         listaJug.add(jugador)
     }
+
 
     fun toJson(): String{
         val gson = Gson()

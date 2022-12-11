@@ -50,35 +50,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-    fun borrar() {
-        val client = OkHttpClient()
-        val request = Request.Builder()
-        request.url("http://10.0.2.2:8084/borrar")
-        val call = client.newCall(request.build())
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                println(e.toString())
-                CoroutineScope(Dispatchers.Main).launch {
-                    Toast.makeText(this@MainActivity, "Algo ha ido mal", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                println(response.toString())
-                response.body?.let { responseBody ->
-                    val body = responseBody.string()
-                    println(body)
-                    CoroutineScope(Dispatchers.Main).launch {
-                        print("Correcto")
-                    }
-
-                }
-
-            }
-        })
-    }
 }
 
 

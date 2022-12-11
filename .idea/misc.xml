@@ -9,12 +9,12 @@
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_player.xml" value="0.25" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/item_user.xml" value="0.22708333333333333" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/jugadores.xml" value="0.25" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/jugadores.xml" value="0.19230769230769232" />
         <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/login.xml" value="0.22" />
-        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/usuarios.xml" value="0.2" />
+        <entry key="..\:/Users/carlo/AndroidStudioProjects/Texas/app/src/main/res/layout/usuarios.xml" value="0.1" />
       </map>
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="16" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="16" project-jdk-type="JavaSDK" />
 </project>

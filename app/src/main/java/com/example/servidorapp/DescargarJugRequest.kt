@@ -23,7 +23,6 @@ class DescargarJugRequest {
                 if (response.isSuccessful) {
                     response.body?.string().let { responseBody ->
                         val jugador = gson.fromJson(responseBody, Jugadores::class.java)
-
                         listaJug.agregar(jugador)
                     }
 

@@ -2,7 +2,9 @@ package com.example.servidorapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.servidorapp.databinding.ItemPlayerBinding
@@ -12,9 +14,12 @@ import kotlinx.coroutines.launch
 import okhttp3.*
 import java.io.IOException
 
+    private lateinit var juegoActivity: JuegoActivity
 
 class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
     : RecyclerView.Adapter<AdapterJugadores.TextoViewHolder>() {
+
+    private var canToCall = 0
 
     class TextoViewHolder(val itemBinding: ItemPlayerBinding) :
         RecyclerView.ViewHolder(itemBinding.root)
@@ -30,32 +35,96 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
     }
 
     override fun onBindViewHolder(holder: TextoViewHolder, position: Int) {
+
+        var boteActual = 0
+
         val jug= jugador.listaJug[position]
+        var next=position+1
         holder.itemBinding.user.text = jug.nombre
         holder.itemBinding.stack.text = jug.stack.toString()
-        if (!jug.turno){
-            holder.itemBinding.cajaJug.isEnabled.not()
+
+        if (jug.turno){
+            holder.itemBinding.check.isEnabled = true
+            holder.itemBinding.fold.isEnabled = true
+            holder.itemBinding.raise.isEnabled = true
+            holder.itemBinding.call.isEnabled = true
+            holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.green))
+        }else{
+            holder.itemBinding.check.isEnabled = false
+            holder.itemBinding.fold.isEnabled = false
+            holder.itemBinding.raise.isEnabled = false
+            holder.itemBinding.call.isEnabled = false
+            holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
         }
         val id = jug.id
 
+
+
         holder.itemBinding.check.setOnClickListener {
-            val peticion = "http://10.0.2.2:8084/check/${position}"
+            val peticion = "http://10.0.2.2:8084/check/${id}"
             llamada(holder, peticion)
+
+            holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            jug.turno = false
+            if (next > players-1){
+                next = 0
+            }
+            jugador.listaJug[next].turno=true
+            notifyDataSetChanged()
                 }
 
+
+
         holder.itemBinding.call.setOnClickListener {
-           // val peticion = "http://10.0.2.2:8084/call/${cantidad}/${bote}"
-           // llamada(holder, peticion)
+           val peticion = "http://10.0.2.2:8084/call/${id}/${canToCall}/${boteActual}"
+            llamada(holder, peticion)
+            boteActual += canToCall
+            jug.stack = jug.stack - canToCall
+            holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            jug.turno = false
+            if (next > players-1){
+                next = 0
+            }
+            jugador.listaJug[next].turno=true
+            //juegoActivity.subirBote(canToCall)
+           notifyDataSetChanged()
+           // notifyItemChanged(position)
         }
+
+
 
         holder.itemBinding.raise.setOnClickListener {
-          //  val peticion = "http://10.0.2.2:8084/raise/${id}/${cantidad}/${bote}"
-           // llamada(holder, peticion)
+            val subida = holder.itemBinding.subir.text.toString().toInt()
+            canToCall = subida
+            val peticion = "http://10.0.2.2:8084/raise/${id}/${subida}/${boteActual}"
+            llamada(holder, peticion)
+            boteActual += canToCall
+            jug.stack = jug.stack - canToCall
+            holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            jug.turno = false
+            if (next > players-1){
+                next = 0
+            }
+            jugador.listaJug[next].turno=true
+            //juegoActivity.subirBote(canToCall)
+           notifyDataSetChanged()
+          //  notifyItemChanged(position)
         }
 
+
+
         holder.itemBinding.fold.setOnClickListener {
-            val peticion = "http://10.0.2.2:8084/fold/${id}"
-          //  llamada(holder, peticion)
+            val peticion = "http://10.0.2.2:8084/fold/${position+1}"
+            llamada(holder, peticion)
+
+            holder.itemBinding.cajaJug.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+            jug.turno = false
+            if (next > players-1){
+                next = 0
+            }
+            jugador.listaJug[next].turno=true
+           notifyDataSetChanged()
+           // notifyItemChanged(position)
         }
 
 
