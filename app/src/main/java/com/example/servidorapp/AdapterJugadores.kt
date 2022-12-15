@@ -85,6 +85,7 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
                 jugador.listaJug[i].vivo = false
             }
             jug.vivo=true
+            notifyDataSetChanged()
         }
 
 
