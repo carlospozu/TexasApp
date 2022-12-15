@@ -44,11 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        borrar()
-        Toast.makeText( this@LoginActivity,"Correctisimo", Toast.LENGTH_SHORT).show()
-    }
+
 
 
     fun login(usuario: String, contrasena: String) {
@@ -78,6 +74,12 @@ class LoginActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        borrar()
+        Toast.makeText( this@LoginActivity,"Correctisimo", Toast.LENGTH_SHORT).show()
     }
 
     fun borrar() {

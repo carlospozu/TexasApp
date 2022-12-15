@@ -34,16 +34,12 @@ class UsersActivity : AppCompatActivity() {
         val stack = intent.getIntExtra("stack", 20000)
         adapter(players, stack)
 
-
-
     binding.avanzar.setOnClickListener{
                 val intent = Intent(this@UsersActivity, JuegoActivity::class.java)
                 intent.putExtra("players", players)
                 startActivity(intent)
         }
     }
-
-
 
     fun adapter(players: Int, stack: Int) {
         adapter = AdapterUsers(players, stack)

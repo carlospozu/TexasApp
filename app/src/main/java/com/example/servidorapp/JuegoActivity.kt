@@ -45,7 +45,7 @@ class JuegoActivity : AppCompatActivity() {
 
    fun llamada(players: Int, bote: TextView){
         lifecycleScope.launch(Dispatchers.IO) {
-            var listaJugadores = mutableListOf<Jugadores>()
+           // var listaJugadores = mutableListOf<Jugadores>()
              listaJugg = DescargarJugRequest.get(players)
             withContext(Dispatchers.Main) {
                 adapter(players, listaJugg)

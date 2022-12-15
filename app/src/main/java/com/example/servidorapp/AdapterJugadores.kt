@@ -80,6 +80,13 @@ class AdapterJugadores(val players: Int, val jugador: ListaJugadores)
         }
         val id = jug.id
 
+        holder.itemBinding.foto.setOnClickListener{
+            for (i in 0 .. player){
+                jugador.listaJug[i].vivo = false
+            }
+            jug.vivo=true
+        }
+
 
 
         holder.itemBinding.check.setOnClickListener {
